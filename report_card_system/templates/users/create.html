@@ -1,0 +1,22 @@
+<!-- templates/users/create.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Create User</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="is_superuser" name="is_superuser">
+            <label class="form-check-label" for="is_superuser">Is Superuser</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ url_for('users.list_users') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

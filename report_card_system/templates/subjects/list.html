@@ -1,0 +1,26 @@
+<!-- templates/subjects/list.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Subjects</h2>
+    <a href="{{ url_for('subjects.create_subject') }}" class="btn btn-primary mb-3">Create Subject</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.subject_name }}</td>
+                <td>
+                    <a href="{{ url_for('subjects.edit_subject', id=subject.subject_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ url_for('subjects.delete_subject', id=subject.subject_id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

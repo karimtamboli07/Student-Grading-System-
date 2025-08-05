@@ -1,0 +1,22 @@
+<!-- templates/categories/edit.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Edit Category</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ category.category_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="grade_from">Grade From</label>
+            <input type="number" class="form-control" id="grade_from" name="grade_from" value="{{ category.grade_from }}" required>
+        </div>
+        <div class="form-group">
+            <label for="grade_to">Grade To</label>
+            <input type="number" class="form-control" id="grade_to" name="grade_to" value="{{ category.grade_to }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('categories.list_categories') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

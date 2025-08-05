@@ -1,0 +1,26 @@
+<!-- templates/classes/list.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Classes</h2>
+    <a href="{{ url_for('classes.create_class') }}" class="btn btn-primary mb-3">Create Class</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for class_obj in classes %}
+            <tr>
+                <td>{{ class_obj.class_name }}</td>
+                <td>
+                    <a href="{{ url_for('classes.edit_class', id=class_obj.class_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ url_for('classes.delete_class', id=class_obj.class_id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

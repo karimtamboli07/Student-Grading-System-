@@ -1,0 +1,30 @@
+<!-- templates/categories/list.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Categories</h2>
+    <a href="{{ url_for('categories.create_category') }}" class="btn btn-primary mb-3">Create Category</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade From</th>
+                <th>Grade To</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.category_name }}</td>
+                <td>{{ category.grade_from }}</td>
+                <td>{{ category.grade_to }}</td>
+                <td>
+                    <a href="{{ url_for('categories.edit_category', id=category.category_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ url_for('categories.delete_category', id=category.category_id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

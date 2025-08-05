@@ -1,0 +1,30 @@
+<!-- templates/marks/edit.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Edit Mark</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="student_id">Student</label>
+            <select class="form-control" id="student_id" name="student_id" required>
+                {% for student in students %}
+                    <option value="{{ student.student_id }}" {% if student.student_id == mark.student_id %}selected{% endif %}>{{ student.student_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="subject_id">Subject</label>
+            <select class="form-control" id="subject_id" name="subject_id" required>
+                {% for subject in subjects %}
+                    <option value="{{ subject.subject_id }}" {% if subject.subject_id == mark.subject_id %}selected{% endif %}>{{ subject.subject_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="marks_obtained">Marks Obtained</label>
+            <input type="number" class="form-control" id="marks_obtained" name="marks_obtained" value="{{ mark.marks_obtained }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('marks.list_marks') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

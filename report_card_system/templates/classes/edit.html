@@ -1,0 +1,14 @@
+<!-- templates/classes/edit.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Edit Class</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ class_obj.class_name }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('classes.list_classes') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

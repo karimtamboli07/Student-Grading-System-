@@ -1,0 +1,90 @@
+<!-- templates/marks/list.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Manage Student Marks</h2>
+
+    <div class="mb-4">
+        <h3>Filter Marks by Class</h3>
+        <form method="post" action="{{ url_for('marks.list_marks') }}" class="form-inline">
+            <div class="form-group mr-3">
+                <label for="class_id_filter" class="mr-2">Class:</label>
+                <select class="form-control" id="class_id_filter" name="class_id" onchange="this.form.submit()">
+                    <option value="">-- All Classes --</option>
+                    {% for class_obj in classes %}
+                        <option value="{{ class_obj.class_id }}" {% if selected_class_id == class_obj.class_id|string %}selected{% endif %}>
+                            {{ class_obj.class_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="mb-4">
+        <h3>Add New Mark</h3>
+        <form method="post" action="{{ url_for('marks.add_mark') }}" class="card p-3">
+            <div class="form-row align-items-center">
+                <div class="form-group col-md-4">
+                    <label for="student_id">Student:</label>
+                    <select class="form-control" id="student_id" name="student_id" required>
+                        {% if students %}
+                            {% for student in students %}
+                                <option value="{{ student.student_id }}">{{ student.student_name }}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option value="" disabled>No students available</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="subject_id">Subject:</label>
+                    <select class="form-control" id="subject_id" name="subject_id" required>
+                        {% for subject in subjects %}
+                            <option value="{{ subject.subject_id }}">{{ subject.subject_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="marks_obtained">Marks:</label>
+                    <input type="number" class="form-control" id="marks_obtained" name="marks_obtained" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary">Add Mark</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h3>List of Marks</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Subject</th>
+                    <th>Marks Obtained</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mark in marks %}
+                    <tr>
+                        <td>{{ mark.student_name }}</td>
+                        <td>{{ mark.subject_name }}</td>
+                        <td>{{ mark.marks_obtained }}</td>
+                        <td>
+                            <a href="{{ url_for('marks.edit_mark', id=mark.mark_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ url_for('marks.delete_mark', id=mark.mark_id) }}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No marks recorded yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

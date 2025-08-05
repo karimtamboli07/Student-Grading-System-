@@ -1,0 +1,14 @@
+<!-- templates/subjects/edit.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Edit Subject</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ subject.subject_name }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('subjects.list_subjects') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- templates/students/edit.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Edit Student</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ student.student_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="roll_number">Roll Number</label>
+            <input type="text" class="form-control" id="roll_number" name="roll_number" value="{{ student.student_roll_number }}" required>
+        </div>
+        <div class="form-group">
+            <label for="class_id">Class (Optional)</label>
+            <select class="form-control" id="class_id" name="class_id">
+                <option value="">-- Select Class --</option>
+                {% for class_obj in classes %}
+                    <option value="{{ class_obj.class_id }}" {% if student.class_id == class_obj.class_id %}selected{% endif %}>{{ class_obj.class_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('students.list_students') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
